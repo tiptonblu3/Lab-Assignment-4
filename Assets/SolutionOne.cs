@@ -10,15 +10,17 @@ public class SolutionOne : MonoBehaviour
     public int Level;
     public int ConScore;
     public string Class;
-    public string race;
+    public string Race;
     public int HitPoints;
+    public bool Tough = false;
+    public bool Stout = false;
+    private string FeatT;
+    private string FeatS;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //HitPoints = 0;
-        //System.Random random = new System.Random();
         var Classes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
         {
             {"Artificer", 8},
@@ -35,14 +37,96 @@ public class SolutionOne : MonoBehaviour
             {"Wizard", 6},
             {"Warlock", 8}
         };
-        int HitDie = Classes[Class];
-        Debug.Log($"The Value is: {HitDie}");
 
-        for (int i = 0; i == Level; i++)
+        var Modifiers = new Dictionary<int, int>()
+        {
+            {1,-5},
+            {2,-4},
+            {3,-4},
+            {4,-3},
+            {5,-3},
+            {6,-2},
+            {7,-2},
+            {8,-1},
+            {9,-1},
+            {10,0},
+            {11,0},
+            {12,1},
+            {13,1},
+            {14,2},
+            {15,2},
+            {16,3},
+            {17,3},
+            {18,4},
+            {19,4},
+            {20,5},
+            {21,5},
+            {22,6},
+            {23,6},
+            {24,7},
+            {25,7},
+            {26,8},
+            {27,8},
+            {28,9},
+            {29,9},
+            {30,10}
+        };
+
+        if ( Stout == true)
+        {
+            ConScore = ConScore + 1;
+        }
+        if (Race == "Dwarf" || Race == "dwarf")
+        {
+            ConScore = ConScore + 2;
+        }
+        if (Race == "Orc" || Race == "orc")
+        {
+            ConScore = ConScore + 1;
+        }
+        if (Race == "Goliath" || Race == "goliath")
+        {
+            ConScore = ConScore + 1;
+        }
+
+        int HitDie = Classes[Class];
+        Debug.Log($"The Hit Die Value is a d{HitDie}");
+        int ConMod = Modifiers[ConScore];
+        Debug.Log($"The Constitution Modifier is {ConMod}");
+
+        for (int i = 0; i < Level; i++)
         {
             HitPoints = HitPoints + UnityEngine.Random.Range(1,HitDie);
+            HitPoints = HitPoints + ConMod;
+            if ( Tough == true)
+            {
+                HitPoints = HitPoints + 2;
+            }
+            //Debug.Log($"The second Value is: {HitPoints}");
         }
-        Debug.Log($"The second Value is: {HitPoints}");
+        Debug.Log($"You have this amount of Hit Points: {HitPoints}");
+
+    #region Feats Debug
+        if ( Tough == true)
+        {
+            FeatT = "has the Tough Feat";
+        }
+        else 
+        {
+            FeatT = "doesn't have the Tough Feat";
+        }
+        if ( Stout == true)
+        {
+            FeatS = "has the Stout Feat";
+                
+        }
+        else 
+        {
+            FeatS = "doesn't have the Stout Feat";
+        }
+    #endregion
+        
+        Debug.Log($"My Character {CharacterName} is a level {Level} {Class} with a CON score of {ConScore} and is the {Race} race {FeatT} {FeatS} and has a Health Value of {HitPoints}");
     }
 
 }
