@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class SolutionOne : MonoBehaviour
@@ -10,11 +11,14 @@ public class SolutionOne : MonoBehaviour
     public int ConScore;
     public string Class;
     public string race;
+    public int HitPoints;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //HitPoints = 0;
+        //System.Random random = new System.Random();
         var Classes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
         {
             {"Artificer", 8},
@@ -33,6 +37,12 @@ public class SolutionOne : MonoBehaviour
         };
         int HitDie = Classes[Class];
         Debug.Log($"The Value is: {HitDie}");
+
+        for (int i = 0; i == Level; i++)
+        {
+            HitPoints = HitPoints + UnityEngine.Random.Range(1,HitDie);
+        }
+        Debug.Log($"The second Value is: {HitPoints}");
     }
 
 }
