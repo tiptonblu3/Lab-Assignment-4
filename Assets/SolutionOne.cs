@@ -21,6 +21,7 @@ public class SolutionOne : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Hit dice depending on class
         var Classes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
         {
             {"Artificer", 8},
@@ -37,7 +38,7 @@ public class SolutionOne : MonoBehaviour
             {"Wizard", 6},
             {"Warlock", 8}
         };
-
+        //modifier depending on constitution score
         var Modifiers = new Dictionary<int, int>()
         {
             {1,-5},
@@ -72,6 +73,8 @@ public class SolutionOne : MonoBehaviour
             {30,10}
         };
 
+        //check if race with modifier and if so apply modifier to constutition score
+        #region RaceCheck
         if ( Stout == true)
         {
             ConScore = ConScore + 1;
@@ -88,25 +91,31 @@ public class SolutionOne : MonoBehaviour
         {
             ConScore = ConScore + 1;
         }
+        #endregion
 
+        //check for class and give specific hit die
         int HitDie = Classes[Class];
         Debug.Log($"The Hit Die Value is a d{HitDie}");
+        //apply modifier to constutition score
         int ConMod = Modifiers[ConScore];
         Debug.Log($"The Constitution Modifier is {ConMod}");
-
+        //roll dice based on level
         for (int i = 0; i < Level; i++)
         {
+            //dice roll added to total hit points
             HitPoints = HitPoints + UnityEngine.Random.Range(1,HitDie);
+            // add constution modifier to hit points
             HitPoints = HitPoints + ConMod;
+            //if you have tough add hit points to total
             if ( Tough == true)
             {
                 HitPoints = HitPoints + 2;
             }
-            //Debug.Log($"The second Value is: {HitPoints}");
         }
         Debug.Log($"You have this amount of Hit Points: {HitPoints}");
 
-    #region Feats Debug
+        //check for feats and output accordingly
+        #region Feats Debug
         if ( Tough == true)
         {
             FeatT = "has the Tough Feat";
@@ -124,8 +133,8 @@ public class SolutionOne : MonoBehaviour
         {
             FeatS = "doesn't have the Stout Feat";
         }
-    #endregion
-        
+        #endregion
+        //output character summary
         Debug.Log($"My Character {CharacterName} is a level {Level} {Class} with a CON score of {ConScore} and is the {Race} race {FeatT} {FeatS} and has a Health Value of {HitPoints}");
     }
 
