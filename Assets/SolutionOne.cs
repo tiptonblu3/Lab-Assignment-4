@@ -11,11 +11,12 @@ public class SolutionOne : MonoBehaviour
     public int ConScore;
     public string Class;
     public string Race;
-    public int HitPoints;
+    public float HitPoints;
     public bool Tough = false;
     public bool Stout = false;
     private string FeatT;
     private string FeatS;
+    public bool HpRoll = false;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -99,18 +100,31 @@ public class SolutionOne : MonoBehaviour
         //apply modifier to constutition score
         int ConMod = Modifiers[ConScore];
         Debug.Log($"The Constitution Modifier is {ConMod}");
-        //roll dice based on level
-        for (int i = 0; i < Level; i++)
+
+        if (HpRoll == true)
         {
-            //dice roll added to total hit points
-            HitPoints = HitPoints + UnityEngine.Random.Range(1,HitDie);
-            // add constution modifier to hit points
-            HitPoints = HitPoints + ConMod;
-            //if you have tough add hit points to total
-            if ( Tough == true)
+            //roll dice based on level
+            for (int i = 0; i < Level; i++)
             {
-                HitPoints = HitPoints + 2;
+                //dice roll added to total hit points
+                HitPoints = HitPoints + UnityEngine.Random.Range(1,HitDie);
+                // add constution modifier to hit points
+                HitPoints = HitPoints + ConMod;
+                //if you have tough add hit points to total
+                if ( Tough == true)
+                {
+                    HitPoints = HitPoints + 2;
+                }
             }
+        }
+        if (HpRoll == false)
+        {
+            //calculate hit points by finding the average roll
+            HitPoints = ((HitDie / 2) + 0.5f) * Level + (ConMod * Level);
+            if ( Tough == true)
+                {
+                    HitPoints = HitPoints + (2 * Level);
+                }
         }
         Debug.Log($"You have this amount of Hit Points: {HitPoints}");
 
