@@ -36,18 +36,19 @@ public string debugView;
         HitpointCalc();
 //run these before finial message so that the final message can pull the correct hit point total and con mod for the character
 
-
+//grab data and give it to a new character
 myCreatedCharacter = new CharacterData(CharacterName, className, Race, Level, HitPoints, ConScore, Tough, Stout);
-myCreatedCharacter.DisplayInfo();
 
-         string featText = (Tough && Stout) ? "both Stout and Tough feats" : 
-                          (Tough) ? "the Tough feat" : 
-                          (Stout) ? "the Stout feat" : "no feats";
+//create game object for character data to be on
+GameObject newCharObject = new GameObject(CharacterName);
 
-        debugView = $"Name: {CharacterName}, Class: {className}, Race: {Race}, Level: {Level}, HP: {HitPoints}, Constitution: {ConScore}, {featText}";
+//add character viewer component to the game object and give it the character data so it can display it
+CharacterViewer viewer = newCharObject.AddComponent<CharacterViewer>();
 
-            
-    }
+//make character data equal the new data for the empty character
+viewer.characterData = myCreatedCharacter;
+
+     }
 
 //calculate con modifiers to apply to hit point calculation and apply any modifiers to con score
     void ConModCalc()
@@ -80,17 +81,23 @@ myCreatedCharacter.DisplayInfo();
         if (ManuellyCalculatedHitDie == true)
         {
         
-        AverageNum = (12 / 2) + 0.5f;
+        AverageNum = (hitDieResult / 2) + 0.5f;
         roundedUpHP = (Level * AverageNum) + ConMod;
-                Debug.Log(roundedUpHP   );
+        // rounds up
         HitPoints = (int)Math.Ceiling(roundedUpHP); 
-        Debug.Log(AverageNum);
 
         
         }
         else if (RolledHitDie == true)
         {
-                    HitPoints = (Level * hitDieResult) + ConMod;
+            //roll dice based on level
+            for (int i = 0; i < Level; i++)
+            {
+                //dice roll added to total hit points
+                HitPoints = HitPoints + UnityEngine.Random.Range(1,hitDieResult);
+                // add constution modifier to hit points
+                HitPoints = HitPoints + ConMod;
+            }
         }
 
         else{}
@@ -102,4 +109,5 @@ myCreatedCharacter.DisplayInfo();
 
 
 }
+
  

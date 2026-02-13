@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 2122777321}
   - component: {fileID: 2122777320}
   m_Layer: 0
-  m_Name: Test
+  m_Name: Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,10 +416,10 @@ MonoBehaviour:
   className: Barbarian
   Race: Elf
   Level: 3
-  ConScore: 15
+  ConScore: 19
   HitPoints: 0
-  Tough: 0
-  Stout: 0
+  Tough: 1
+  Stout: 1
   ManuellyCalculatedHitDie: 0
   RolledHitDie: 1
   hitDieResult: 0
@@ -433,6 +433,7 @@ MonoBehaviour:
     Constitution: 0
     HasTough: 0
     HasStout: 0
+  debugView: 
 --- !u!4 &2122777321
 Transform:
   m_ObjectHideFlags: 0
