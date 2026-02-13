@@ -1,6 +1,6 @@
 using System;
 
-[Serializable] // This allows it to show up in the Inspector if needed
+[System.Serializable] // This allows it to show up in the Inspector if needed
 public class CharacterData
 {
     public string Name;

@@ -25,6 +25,8 @@ public class ControlScript : MonoBehaviour
     #endregion
 
 public CharacterData myCreatedCharacter;
+[TextArea(3, 10)] // Makes a nice big box in the Inspector
+public string debugView;
     void Start()
     {
         //class name for pulling hitdice out of class dictionary
@@ -37,8 +39,14 @@ public CharacterData myCreatedCharacter;
 
 myCreatedCharacter = new CharacterData(CharacterName, className, Race, Level, HitPoints, ConScore, Tough, Stout);
 myCreatedCharacter.DisplayInfo();
-        
-        
+
+         string featText = (Tough && Stout) ? "both Stout and Tough feats" : 
+                          (Tough) ? "the Tough feat" : 
+                          (Stout) ? "the Stout feat" : "no feats";
+
+        debugView = $"Name: {CharacterName}, Class: {className}, Race: {Race}, Level: {Level}, HP: {HitPoints}, Constitution: {ConScore}, {featText}";
+
+            
     }
 
 //calculate con modifiers to apply to hit point calculation and apply any modifiers to con score
