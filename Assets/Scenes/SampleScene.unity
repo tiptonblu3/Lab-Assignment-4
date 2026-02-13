@@ -414,14 +414,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Main
   CharacterName: GimbleGorp
   className: Barbarian
-  Race: 
-  Level: 0
+  Race: Elf
+  Level: 3
   ConScore: 15
   HitPoints: 0
   Tough: 0
-  Stout: 1
+  Stout: 0
+  ManuellyCalculatedHitDie: 0
+  RolledHitDie: 1
   hitDieResult: 0
   ConMod: 0
+  myCreatedCharacter:
+    Name: 
+    Class: 
+    Race: 
+    Level: 0
+    HP: 0
+    Constitution: 0
+    HasTough: 0
+    HasStout: 0
 --- !u!4 &2122777321
 Transform:
   m_ObjectHideFlags: 0
