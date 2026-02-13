@@ -1,10 +1,9 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
-public class SolutionOne : MonoBehaviour
+public class Backup : MonoBehaviour
 {
     #region Declares
     public string CharacterName;
@@ -21,8 +20,8 @@ public class SolutionOne : MonoBehaviour
 
 
 
-// Start is called once before the first execution of Update after the MonoBehaviour is created
-void Start()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
         //Hit dice depending on class
         var Classes = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
@@ -78,7 +77,7 @@ void Start()
 
         //check if race with modifier and if so apply modifier to constutition score
         #region RaceCheck
-        if ( Stout == true)
+        if (Stout == true)
         {
             ConScore = ConScore + 1;
         }
@@ -106,11 +105,11 @@ void Start()
         for (int i = 0; i < Level; i++)
         {
             //dice roll added to total hit points
-            HitPoints = HitPoints + UnityEngine.Random.Range(1,HitDie);
+            HitPoints = HitPoints + UnityEngine.Random.Range(1, HitDie);
             // add constution modifier to hit points
             HitPoints = HitPoints + ConMod;
             //if you have tough add hit points to total
-            if ( Tough == true)
+            if (Tough == true)
             {
                 HitPoints = HitPoints + 2;
             }
@@ -119,20 +118,20 @@ void Start()
 
         //check for feats and output accordingly
         #region Feats Debug
-        if ( Tough == true)
+        if (Tough == true)
         {
             FeatT = "has the Tough Feat";
         }
-        else 
+        else
         {
             FeatT = "doesn't have the Tough Feat";
         }
-        if ( Stout == true)
+        if (Stout == true)
         {
             FeatS = "has the Stout Feat";
-                
+
         }
-        else 
+        else
         {
             FeatS = "doesn't have the Stout Feat";
         }
